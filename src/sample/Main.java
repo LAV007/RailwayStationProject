@@ -24,7 +24,6 @@ public class Main extends Application {
             User user = (User) ois.readObject();
             if(!user.getLogin().equals(""))
                 scene = "main.fxml";
-
             ois.close();
         }
 
