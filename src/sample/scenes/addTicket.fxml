@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="333.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.AddTicket">
+    <children>
+        <Label alignment="CENTER" layoutX="67.0" layoutY="123.0" prefHeight="36.0" prefWidth="200.0" text="Book ticket" textAlignment="CENTER" textFill="#ffc000">
+            <font>
+                <Font name="Montserrat Bold" size="25.0" />
+            </font>
+        </Label>
+        <TextField fx:id="personAdd" focusTraversable="false" layoutX="144.0" layoutY="235.0" prefHeight="42.0" prefWidth="175.0" promptText="person" style="-fx-text-fill: #00c3d9;" styleClass="text-input" stylesheets="@../styles/style.css">
+            <font>
+                <Font name="Montserrat Regular" size="14.0" />
+            </font>
+        </TextField>
+        <Button fx:id="btn_add" layoutX="13.0" layoutY="288.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="309.0" stylesheets="@../styles/style.css" text="book" textFill="WHITE">
+            <font>
+                <Font name="Montserrat Regular" size="14.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+        <TextArea fx:id="dateAdd" focusTraversable="false" layoutX="11.0" layoutY="232.0" prefHeight="46.0" prefWidth="119.0" promptText="date" style="-fx-text-fill: #00c3d9;" styleClass="text-input" stylesheets="@../styles/text-area.css">
+            <font>
+                <Font name="Montserrat Regular" size="14.0" />
+            </font>
+        </TextArea>
+        <TextArea fx:id="timeAdd" focusTraversable="false" layoutX="13.0" layoutY="177.0" prefHeight="47.0" prefWidth="119.0" promptText="time" style="-fx-text-fill: #00c3d9;" styleClass="text-area" stylesheets="@../styles/text-area.css">
+            <font>
+                <Font name="Montserrat Regular" size="14.0" />
+            </font>
+        </TextArea>
+      <TextArea fx:id="stationAdd" focusTraversable="false" layoutX="145.0" layoutY="177.0" prefHeight="47.0" prefWidth="175.0" promptText="station" style="-fx-text-fill: #00c3d9;" styleClass="text-area" stylesheets="@../styles/text-area.css">
+         <font>
+            <Font name="Montserrat Regular" size="14.0" />
+         </font>
+      </TextArea>
+      <ImageView fitHeight="102.0" fitWidth="333.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../recourses/epam2.png" />
+         </image>
+      </ImageView>
+    </children>
+</AnchorPane>
