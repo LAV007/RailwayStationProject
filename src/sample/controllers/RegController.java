@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import sample.auxiliary.dataDAO;
 import sample.dataBase.DataBase;
 import sample.auxiliary.User;
 import java.io.FileOutputStream;
@@ -38,7 +39,7 @@ public class RegController {
     @FXML
     private PasswordField password_auth;
 
-    private DataBase dataBase = new DataBase();
+    private dataDAO dataBase = new DataBase();
 
     @FXML
     void initialize() {

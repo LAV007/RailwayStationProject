@@ -1,8 +1,10 @@
 package sample.dataBase;
 
+import sample.auxiliary.dataDAO;
+
 import java.sql.*;
 
-public class DataBase {
+public class DataBase implements dataDAO {
 
     private final String HOST = "localhost";
     private final String PORT = "3306";
@@ -38,40 +40,56 @@ public class DataBase {
 
     public boolean regUser (String login, String password) throws SQLException, ClassNotFoundException {
         String sql = "INSERT INTO `users` (`login`, `password`) VALUES(?, ?)";
+        try(Connection connection = getDataBaseConnection();
+            PreparedStatement prSt = connection.prepareStatement(sql))
+        {
+            Statement statement = getDataBaseConnection().createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM `users` WHERE `login` = '" + login + "' LIMIT 1");
+            if(resultSet.next()) return false;
 
-        Statement statement = getDataBaseConnection().createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT * FROM `users` WHERE `login` = '" + login + "' LIMIT 1");
-        if(resultSet.next()) return false;
-
-        PreparedStatement prSt = getDataBaseConnection().prepareStatement(sql);
-        prSt.setString(1, login);
-        prSt.setString(2, password);
-        prSt.executeUpdate();
-        return true;
+            prSt.setString(1, login);
+            prSt.setString(2, password);
+            prSt.executeUpdate();
+            return true;
+        }
     }
 
     public boolean authUser(String login, String password) throws SQLException, ClassNotFoundException {
-        Statement statement = getDataBaseConnection().createStatement();
         String sql = "SELECT * FROM `users` WHERE `login` = '" + login + "' AND `password` = '" + password + "' LIMIT 1";
-        ResultSet res = statement.executeQuery(sql);
-        return res.next();
+        try(Connection connection = getDataBaseConnection())
+        {
+            Statement statement = connection.createStatement();
+            ResultSet res = statement.executeQuery(sql);
+            return res.next();
+        }
     }
 
     public ResultSet getTickets() throws SQLException, ClassNotFoundException {
-        String sql = "SELECT `station`, `date`, `time`, `FIO` FROM `tickets`";
-        Statement statement = getDataBaseConnection().createStatement();
-        ResultSet res = statement.executeQuery(sql);
-        return res;
+        try {
+            String sql = "SELECT `station`, `date`, `time`, `FIO` FROM `tickets`";
+            Statement statement = getDataBaseConnection().createStatement();
+            ResultSet res = statement.executeQuery(sql);
+            return res;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            getDataBaseConnection().close();
+        }
+        return null;
     }
 
     public void addTicket(String station, String date, String time, String fio) throws SQLException, ClassNotFoundException {
         String sql = "INSERT INTO `tickets` (`station`, `date`, `time`, `FIO`) VALUES(?, ?, ?, ?)";
-
-        PreparedStatement prSt = getDataBaseConnection().prepareStatement(sql);
-        prSt.setString(1, station);
-        prSt.setString(2, date);
-        prSt.setString(3, time);
-        prSt.setString(4, fio);
-        prSt.executeUpdate();
+        try(Connection connection = getDataBaseConnection();
+            PreparedStatement prSt = connection.prepareStatement(sql))
+        {
+            prSt.setString(1, station);
+            prSt.setString(2, date);
+            prSt.setString(3, time);
+            prSt.setString(4, fio);
+            prSt.executeUpdate();
+        }
     }
 }

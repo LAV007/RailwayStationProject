@@ -18,16 +18,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import sample.auxiliary.dataDAO;
 import sample.dataBase.DataBase;
 import sample.auxiliary.User;
 
 public class MainController {
-
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
 
     @FXML
     private Button btn_exit, btn_add;
@@ -35,7 +30,7 @@ public class MainController {
     @FXML
     private VBox paneVBox;
 
-    private DataBase dataBase = new DataBase();
+    private dataDAO dataBase = new DataBase();
 
     @FXML
     void initialize() throws SQLException, ClassNotFoundException {

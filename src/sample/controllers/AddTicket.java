@@ -9,6 +9,7 @@ package sample.controllers;
         import javafx.scene.control.TextArea;
         import javafx.scene.control.TextField;
         import javafx.stage.Stage;
+        import sample.auxiliary.dataDAO;
         import sample.dataBase.DataBase;
 
         import java.io.IOException;
@@ -31,7 +32,7 @@ public class AddTicket {
     @FXML
     private TextArea stationAdd;
 
-    private DataBase dataBase = new DataBase();
+    private dataDAO dataBase = new DataBase();
 
     @FXML
     void initialize() {
