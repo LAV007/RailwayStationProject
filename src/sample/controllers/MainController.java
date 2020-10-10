@@ -33,38 +33,37 @@ public class MainController {
     @FXML
     private VBox paneVBox;
 
+    @FXML
+    private VBox paneVBox1;
+
     private DataBase dataBase = new DataBase();
 
     @FXML
     void initialize() throws SQLException {
 
-       List<Passenger> passengerList = new PassengerService().readPassenger();
-                for (Passenger passenger : passengerList) {
-                    System.out.println(passenger);
-                }
+        //Отладочный вывод в консоль пассажиров
+        List<Passenger> passengers = new PassengerService().readPassenger();
+        for (Passenger passenger : passengers) {
+            System.out.println(passenger);
+        }
+        //Отладочный вывод в консоль билетов
+        List<Ticket> tickets = new TicketService().readTicket();
+        for (Ticket ticket : tickets) {
+            System.out.println(ticket);
+        }
 
-        List<Ticket> ticketList = new TicketService().readTicket();
-                for (Ticket ticket : ticketList) {
-                    System.out.println(ticket);
-                }
-
-        ResultSet res = dataBase.getTickets();
-        while(res.next()) {
+        //Вывод пассажиров в UI
+        ResultSet resultSet = new PassengerService().getPassengers();
+        while(resultSet.next()) {
             Node node = null;
             try {
-                node = FXMLLoader.load(getClass().getResource("/sample/scenes/tickets.fxml"));
+                node = FXMLLoader.load(getClass().getResource("/sample/scenes/passengers.fxml"));
 
-                Label station = (Label) node.lookup("#station");
-                station.setText(res.getString("station"));
+                Label passengersName = (Label) node.lookup("#passengersName");
+                passengersName.setText(resultSet.getString("name"));
 
-                Label date = (Label) node.lookup("#date");
-                date.setText(res.getString("date"));
-
-                Label time = (Label) node.lookup("#time");
-                time.setText(res.getString("time"));
-
-                Label fio = (Label) node.lookup("#FIO");
-                fio.setText(res.getString("FIO"));
+                Label passengersSurname = (Label) node.lookup("#passengersSurname");
+                passengersSurname.setText(resultSet.getString("surname"));
 
                 final Node nodeSet = node;
 
@@ -86,6 +85,41 @@ public class MainController {
             paneVBox.setSpacing(10);
         }
 
+        //Вывод билетов в UI
+        ResultSet res = new TicketService().getTickets();
+        while(res.next()) {
+            Node node = null;
+            try {
+                node = FXMLLoader.load(getClass().getResource("/sample/scenes/tickets.fxml"));
+
+                Label station = (Label) node.lookup("#station");
+                station.setText(res.getString("station"));
+
+                Label date = (Label) node.lookup("#date");
+                date.setText(res.getString("date"));
+
+                Label time = (Label) node.lookup("#time");
+                time.setText(res.getString("time"));
+
+                final Node nodeSet = node;
+
+                node.setOnMouseEntered(event -> {
+                    nodeSet.setStyle("-fx-background-color:  #ffc000");
+                });
+
+                node.setOnMouseExited(event -> {
+                    nodeSet.setStyle("-fx-background-color: #d9e8ea");
+                });
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            HBox hBox = new HBox();
+            hBox.getChildren().add(node);
+            hBox.setAlignment(Pos.BASELINE_CENTER);
+            paneVBox1.getChildren().add(hBox);
+            paneVBox1.setSpacing(10);
+        }
 
         btn_exit.setOnAction(event -> {
             try {

@@ -70,36 +70,6 @@ public class TicketService extends DataBase implements TicketDAO {
         return ticketList;
     }
 
-    public Ticket readTicketById(int id) throws SQLException {
-        PreparedStatement preparedStatement = null;
-
-        String sql = "SELECT `station`, `date`, `time` FROM `ticket` WHERE `id`=?";
-
-        Ticket ticket = new Ticket();
-        try {
-            preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setLong(1, id);
-
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            ticket.setStation(resultSet.getString("station"));
-            ticket.setDate(resultSet.getString("date"));
-            ticket.setTime(resultSet.getString("time"));
-
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
-            if (connection != null) {
-                connection.close();
-            }
-        }
-        return ticket;
-    }
-
     @Override
     public void updateTicket(Ticket ticket) throws SQLException {
         PreparedStatement preparedStatement = null;
@@ -148,5 +118,19 @@ public class TicketService extends DataBase implements TicketDAO {
                 connection.close();
             }
         }
+    }
+
+    public ResultSet getTickets() throws SQLException{
+        try {
+            String sql = "SELECT `station`, `date`, `time` FROM `ticket`";
+            Statement statement = getDataBaseConnection().createStatement();
+            ResultSet res = statement.executeQuery(sql);
+            return res;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            getDataBaseConnection().close();
+        }
+        return null;
     }
 }

@@ -65,7 +65,7 @@ public class AddTicket {
             }
 
             try {
-                dataBase.addTicket(stationAdd.getText(), dateAdd.getText(), timeAdd.getText(), personAdd.getCharacters().toString());
+                //dataBase.addTicket(stationAdd.getText(), dateAdd.getText(), timeAdd.getText(), personAdd.getCharacters().toString());
 
                 PassengerService passengerService = new PassengerService();
                 Passenger passengerWithTicket = new Passenger(personAdd.getCharacters().toString(), surname.getCharacters().toString());
@@ -75,10 +75,6 @@ public class AddTicket {
                 Ticket ticket = new Ticket(dateAdd.getText(), timeAdd.getText(), stationAdd.getText());
                 ticketService.createTicket(ticket);//записывает в БД новый билет
 
-                RequestService requestService = new RequestService();
-                Request request = new Request(1,1);
-                requestService.createRequest(request);//записывает в БД новый запрос
-
                 Parent root = FXMLLoader.load(getClass().getResource("/sample/scenes/main.fxml"));
                 Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 primaryStage.setTitle("Railway station");
@@ -87,8 +83,6 @@ public class AddTicket {
             } catch (SQLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
         });

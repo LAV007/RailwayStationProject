@@ -67,35 +67,6 @@ public class RequestService extends DataBase implements RequestDAO {
         return requestList;
     }
 
-    public Request readByPassengerIdAndTicketId(int passengerId, int ticketId) throws SQLException {
-        PreparedStatement preparedStatement = null;
-
-        String sql = "SELECT `passengerId`, `ticketId` FROM `request` WHERE `passengerId`=? AND `ticketId`=?";
-        Request request = new Request();
-        try {
-            preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, passengerId);
-            preparedStatement.setInt(2, ticketId);
-
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            request.setPassengerId(resultSet.getInt("passengerId"));
-            request.setTicketId(resultSet.getInt("ticketId"));
-
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
-            if (connection != null) {
-                connection.close();
-            }
-        }
-        return request;
-    }
-
     @Override
     public void updateRequest(Request request) throws SQLException {
         PreparedStatement preparedStatement = null;

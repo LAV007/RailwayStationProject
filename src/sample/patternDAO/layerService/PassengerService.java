@@ -65,35 +65,6 @@ public class PassengerService extends DataBase implements PassengerDAO {
         return passengerList;
     }
 
-    public Passenger readPassengerById(int id) throws SQLException {
-        PreparedStatement preparedStatement = null;
-
-        String sql = "SELECT `name`, `surname` FROM `passengers` WHERE `id` = ?";
-
-        Passenger passenger = new Passenger();
-        try {
-            preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, id);
-
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            passenger.setName(resultSet.getString("name"));
-            passenger.setSurname(resultSet.getString("surname"));
-
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
-            if (connection != null) {
-                connection.close();
-            }
-        }
-        return passenger;
-    }
-
     @Override
     public void updatePassenger(Passenger passenger) throws SQLException {
         PreparedStatement preparedStatement = null;
@@ -141,5 +112,18 @@ public class PassengerService extends DataBase implements PassengerDAO {
                 connection.close();
             }
         }
+    }
+    public ResultSet getPassengers() throws SQLException{
+        try {
+            String sql = "SELECT `name`, `surname` FROM `passengers`";
+            Statement statement = getDataBaseConnection().createStatement();
+            ResultSet res = statement.executeQuery(sql);
+            return res;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            getDataBaseConnection().close();
+        }
+        return null;
     }
 }

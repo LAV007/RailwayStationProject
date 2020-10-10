@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -21,7 +22,12 @@
         </Button>
       <ScrollPane focusTraversable="false" hbarPolicy="NEVER" layoutX="-5.0" layoutY="64.0" prefHeight="285.0" prefWidth="333.0" stylesheets="@../styles/style.css">
          <content>
-            <VBox fx:id="paneVBox" prefHeight="284.0" prefWidth="309.0" style="-fx-background-color: #d9e8ea;" />
+            <HBox prefHeight="285.0" prefWidth="333.0">
+               <children>
+                  <VBox fx:id="paneVBox" prefHeight="285.0" prefWidth="130.0" style="-fx-background-color: #d9e8ea;" />
+                  <VBox fx:id="paneVBox1" prefHeight="285.0" prefWidth="203.0" style="-fx-background-color: #d9e8ea;" />
+               </children>
+            </HBox>
          </content>
       </ScrollPane>
       <Button fx:id="btn_add" focusTraversable="false" layoutX="136.0" layoutY="15.0" mnemonicParsing="false" stylesheets="@../styles/style.css" text="book ticket" textFill="WHITE">

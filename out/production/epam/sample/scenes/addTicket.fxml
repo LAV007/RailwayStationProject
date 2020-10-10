@@ -17,12 +17,12 @@
                 <Font name="Montserrat Bold" size="25.0" />
             </font>
         </Label>
-        <TextField fx:id="personAdd" focusTraversable="false" layoutX="14.0" layoutY="246.0" prefHeight="42.0" prefWidth="119.0" promptText="name" style="-fx-text-fill: #00c3d9;" styleClass="text-input" stylesheets="@../styles/style.css">
+        <TextField fx:id="personAdd" focusTraversable="false" layoutX="42.0" layoutY="246.0" prefHeight="42.0" prefWidth="119.0" promptText="name" style="-fx-text-fill: #00c3d9;" styleClass="text-input" stylesheets="@../styles/style.css">
             <font>
                 <Font name="Montserrat Regular" size="14.0" />
             </font>
         </TextField>
-        <Button fx:id="btn_add" layoutX="13.0" layoutY="288.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="309.0" stylesheets="@../styles/style.css" text="book" textFill="WHITE">
+        <Button fx:id="btn_add" layoutX="13.0" layoutY="303.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="309.0" stylesheets="@../styles/style.css" text="book" textFill="WHITE">
             <font>
                 <Font name="Montserrat Regular" size="14.0" />
             </font>
@@ -30,17 +30,17 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <TextArea fx:id="dateAdd" focusTraversable="false" layoutX="145.0" layoutY="129.0" prefHeight="46.0" prefWidth="119.0" promptText="date" style="-fx-text-fill: #00c3d9;" styleClass="text-input" stylesheets="@../styles/text-area.css">
+        <TextArea fx:id="dateAdd" focusTraversable="false" layoutX="174.0" layoutY="131.0" prefHeight="46.0" prefWidth="119.0" promptText="date" style="-fx-text-fill: #00c3d9;" styleClass="text-input" stylesheets="@../styles/text-area.css">
             <font>
                 <Font name="Montserrat Regular" size="14.0" />
             </font>
         </TextArea>
-        <TextArea fx:id="timeAdd" focusTraversable="false" layoutX="14.0" layoutY="128.0" prefHeight="47.0" prefWidth="119.0" promptText="time" style="-fx-text-fill: #00c3d9;" styleClass="text-area" stylesheets="@../styles/text-area.css">
+        <TextArea fx:id="timeAdd" focusTraversable="false" layoutX="42.0" layoutY="130.0" prefHeight="47.0" prefWidth="119.0" promptText="time" style="-fx-text-fill: #00c3d9;" styleClass="text-area" stylesheets="@../styles/text-area.css">
             <font>
                 <Font name="Montserrat Regular" size="14.0" />
             </font>
         </TextArea>
-      <TextArea fx:id="stationAdd" focusTraversable="false" layoutX="14.0" layoutY="188.0" prefHeight="47.0" prefWidth="251.0" promptText="station" style="-fx-text-fill: #00c3d9;" styleClass="text-area" stylesheets="@../styles/text-area.css">
+      <TextArea fx:id="stationAdd" focusTraversable="false" layoutX="42.0" layoutY="188.0" prefHeight="47.0" prefWidth="251.0" promptText="station" style="-fx-text-fill: #00c3d9;" styleClass="text-area" stylesheets="@../styles/text-area.css">
          <font>
             <Font name="Montserrat Regular" size="14.0" />
          </font>
@@ -50,7 +50,7 @@
             <Image url="@../recourses/epam2.png" />
          </image>
       </ImageView>
-      <TextField fx:id="surname" focusTraversable="false" layoutX="148.0" layoutY="246.0" prefHeight="42.0" prefWidth="119.0" promptText="surname" style="-fx-text-fill: #00c3d9;" styleClass="text-input" stylesheets="@../styles/style.css">
+      <TextField fx:id="surname" focusTraversable="false" layoutX="174.0" layoutY="246.0" prefHeight="42.0" prefWidth="119.0" promptText="surname" style="-fx-text-fill: #00c3d9;" styleClass="text-input" stylesheets="@../styles/style.css">
          <font>
             <Font name="Montserrat Regular" size="14.0" />
          </font>
