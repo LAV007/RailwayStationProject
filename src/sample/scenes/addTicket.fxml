@@ -12,12 +12,12 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="333.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.AddTicket">
     <children>
-        <Label alignment="CENTER" layoutX="67.0" layoutY="123.0" prefHeight="36.0" prefWidth="200.0" text="Book ticket" textAlignment="CENTER" textFill="#ffc000">
+        <Label alignment="CENTER" layoutX="67.0" layoutY="92.0" prefHeight="36.0" prefWidth="200.0" text="Book ticket" textAlignment="CENTER" textFill="#ffc000">
             <font>
                 <Font name="Montserrat Bold" size="25.0" />
             </font>
         </Label>
-        <TextField fx:id="personAdd" focusTraversable="false" layoutX="144.0" layoutY="235.0" prefHeight="42.0" prefWidth="175.0" promptText="person" style="-fx-text-fill: #00c3d9;" styleClass="text-input" stylesheets="@../styles/style.css">
+        <TextField fx:id="personAdd" focusTraversable="false" layoutX="14.0" layoutY="246.0" prefHeight="42.0" prefWidth="119.0" promptText="name" style="-fx-text-fill: #00c3d9;" styleClass="text-input" stylesheets="@../styles/style.css">
             <font>
                 <Font name="Montserrat Regular" size="14.0" />
             </font>
@@ -30,17 +30,17 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <TextArea fx:id="dateAdd" focusTraversable="false" layoutX="11.0" layoutY="232.0" prefHeight="46.0" prefWidth="119.0" promptText="date" style="-fx-text-fill: #00c3d9;" styleClass="text-input" stylesheets="@../styles/text-area.css">
+        <TextArea fx:id="dateAdd" focusTraversable="false" layoutX="145.0" layoutY="129.0" prefHeight="46.0" prefWidth="119.0" promptText="date" style="-fx-text-fill: #00c3d9;" styleClass="text-input" stylesheets="@../styles/text-area.css">
             <font>
                 <Font name="Montserrat Regular" size="14.0" />
             </font>
         </TextArea>
-        <TextArea fx:id="timeAdd" focusTraversable="false" layoutX="13.0" layoutY="177.0" prefHeight="47.0" prefWidth="119.0" promptText="time" style="-fx-text-fill: #00c3d9;" styleClass="text-area" stylesheets="@../styles/text-area.css">
+        <TextArea fx:id="timeAdd" focusTraversable="false" layoutX="14.0" layoutY="128.0" prefHeight="47.0" prefWidth="119.0" promptText="time" style="-fx-text-fill: #00c3d9;" styleClass="text-area" stylesheets="@../styles/text-area.css">
             <font>
                 <Font name="Montserrat Regular" size="14.0" />
             </font>
         </TextArea>
-      <TextArea fx:id="stationAdd" focusTraversable="false" layoutX="145.0" layoutY="177.0" prefHeight="47.0" prefWidth="175.0" promptText="station" style="-fx-text-fill: #00c3d9;" styleClass="text-area" stylesheets="@../styles/text-area.css">
+      <TextArea fx:id="stationAdd" focusTraversable="false" layoutX="14.0" layoutY="188.0" prefHeight="47.0" prefWidth="251.0" promptText="station" style="-fx-text-fill: #00c3d9;" styleClass="text-area" stylesheets="@../styles/text-area.css">
          <font>
             <Font name="Montserrat Regular" size="14.0" />
          </font>
@@ -50,5 +50,10 @@
             <Image url="@../recourses/epam2.png" />
          </image>
       </ImageView>
+      <TextField fx:id="surname" focusTraversable="false" layoutX="148.0" layoutY="246.0" prefHeight="42.0" prefWidth="119.0" promptText="surname" style="-fx-text-fill: #00c3d9;" styleClass="text-input" stylesheets="@../styles/style.css">
+         <font>
+            <Font name="Montserrat Regular" size="14.0" />
+         </font>
+      </TextField>
     </children>
 </AnchorPane>

@@ -1,5 +1,4 @@
 package sample.controllers;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -9,8 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import sample.auxiliary.dataDAO;
-import sample.dataBase.DataBase;
+import sample.patternDAO.dataBase.DataBase;
 import sample.auxiliary.User;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -39,13 +37,15 @@ public class RegController {
     @FXML
     private PasswordField password_auth;
 
-    private dataDAO dataBase = new DataBase();
+    private DataBase dataBase = new DataBase();
 
     @FXML
     void initialize() {
-        /**
+
+         /**
          * Actions when you click on the registration button
          */
+
         btn_reg.setOnAction(event -> {
             if(login_reg.getCharacters().length() <= 3) {
                 login_reg.setStyle("-fx-border-color: red");
@@ -72,9 +72,11 @@ public class RegController {
             }
         });
 
-        /**
+
+         /**
          * Actions when clicking the authorization button
          */
+
         btn_auth.setOnAction(event -> {
             if(login_auth.getCharacters().length() <= 3) {
                 login_auth.setStyle("-fx-border-color: red");
@@ -115,11 +117,13 @@ public class RegController {
         });
     }
 
-    /**
+
+     /**
      * This method encrypts the password
      * @param pass
      * @return
      */
+
     public static String md5String(String pass) {
         MessageDigest messageDigest = null;
         byte[] digest = new byte[0];

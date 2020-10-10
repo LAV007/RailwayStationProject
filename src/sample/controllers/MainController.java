@@ -3,10 +3,10 @@ package sample.controllers;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
+import java.util.List;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -18,9 +18,12 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import sample.auxiliary.dataDAO;
-import sample.dataBase.DataBase;
+import sample.patternDAO.dataBase.DataBase;
 import sample.auxiliary.User;
+import sample.patternDAO.layerEntity.Passenger;
+import sample.patternDAO.layerEntity.Ticket;
+import sample.patternDAO.layerService.PassengerService;
+import sample.patternDAO.layerService.TicketService;
 
 public class MainController {
 
@@ -30,10 +33,21 @@ public class MainController {
     @FXML
     private VBox paneVBox;
 
-    private dataDAO dataBase = new DataBase();
+    private DataBase dataBase = new DataBase();
 
     @FXML
-    void initialize() throws SQLException, ClassNotFoundException {
+    void initialize() throws SQLException {
+
+       List<Passenger> passengerList = new PassengerService().readPassenger();
+                for (Passenger passenger : passengerList) {
+                    System.out.println(passenger);
+                }
+
+        List<Ticket> ticketList = new TicketService().readTicket();
+                for (Ticket ticket : ticketList) {
+                    System.out.println(ticket);
+                }
+
         ResultSet res = dataBase.getTickets();
         while(res.next()) {
             Node node = null;
@@ -106,6 +120,5 @@ public class MainController {
                 e.printStackTrace();
             }
         });
-
     }
 }

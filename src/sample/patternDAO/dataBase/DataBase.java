@@ -1,10 +1,8 @@
-package sample.dataBase;
-
-import sample.auxiliary.dataDAO;
+package sample.patternDAO.dataBase;
 
 import java.sql.*;
 
-public class DataBase implements dataDAO {
+public class DataBase{
 
     private final String HOST = "localhost";
     private final String PORT = "3306";
@@ -12,8 +10,7 @@ public class DataBase implements dataDAO {
     private final String LOGIN = "root";
     private final String PASSWORD = "root";
 
-    //переменная для установки подключения к базе данных
-    private Connection dbConnection = null;
+
 
     /**
      * Метод для подключения к базе данных, возвращеет объект с подключением к базе данных
@@ -21,22 +18,23 @@ public class DataBase implements dataDAO {
      * @throws ClassNotFoundException
      * @throws SQLException
      */
-    private Connection getDataBaseConnection() throws ClassNotFoundException, SQLException {
-        //переменная с информацией об определенной безе данных
-        String connection = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DataBaseName + "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        return dbConnection = DriverManager.getConnection(connection, LOGIN, PASSWORD);//помещаем подключение в переменную
+    public Connection getDataBaseConnection()  {
+        Connection dbConnection = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            String connection = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DataBaseName + "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+            dbConnection = DriverManager.getConnection(connection, LOGIN, PASSWORD);//помещаем подключение в переменную
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+        return dbConnection;
     }
 
-    /**
-     * Метод для проверки работоспособности подключения
-     * @throws ClassNotFoundException
-     * @throws SQLException
-     */
-    public void isConnected() throws ClassNotFoundException, SQLException {
+
+   /* public void isConnected() throws ClassNotFoundException, SQLException {
         dbConnection = getDataBaseConnection();
         System.out.println(dbConnection.isValid(1000));
-    }
+    }*/
 
     public boolean regUser (String login, String password) throws SQLException, ClassNotFoundException {
         String sql = "INSERT INTO `users` (`login`, `password`) VALUES(?, ?)";
@@ -64,7 +62,7 @@ public class DataBase implements dataDAO {
         }
     }
 
-    public ResultSet getTickets() throws SQLException, ClassNotFoundException {
+    public ResultSet getTickets() throws SQLException{
         try {
             String sql = "SELECT `station`, `date`, `time`, `FIO` FROM `tickets`";
             Statement statement = getDataBaseConnection().createStatement();
@@ -72,8 +70,6 @@ public class DataBase implements dataDAO {
             return res;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         } finally {
             getDataBaseConnection().close();
         }

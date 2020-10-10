@@ -9,11 +9,17 @@ package sample.controllers;
         import javafx.scene.control.TextArea;
         import javafx.scene.control.TextField;
         import javafx.stage.Stage;
-        import sample.auxiliary.dataDAO;
-        import sample.dataBase.DataBase;
+        import sample.patternDAO.dataBase.DataBase;
+        import sample.patternDAO.layerEntity.Passenger;
+        import sample.patternDAO.layerEntity.Request;
+        import sample.patternDAO.layerEntity.Ticket;
+        import sample.patternDAO.layerService.PassengerService;
+        import sample.patternDAO.layerService.RequestService;
+        import sample.patternDAO.layerService.TicketService;
 
         import java.io.IOException;
         import java.sql.SQLException;
+        import java.util.List;
 
 public class AddTicket {
 
@@ -32,7 +38,10 @@ public class AddTicket {
     @FXML
     private TextArea stationAdd;
 
-    private dataDAO dataBase = new DataBase();
+    @FXML
+    private TextField surname;
+
+    private DataBase dataBase = new DataBase();
 
     @FXML
     void initialize() {
@@ -41,22 +50,34 @@ public class AddTicket {
             dateAdd.setStyle("-fx-border-color: #fafafa");
             timeAdd.setStyle("-fx-border-color: #fafafa");
 
-            if(personAdd.getCharacters().length() <= 5) {
+            if(personAdd.getCharacters().length() <= 2) {
                 personAdd.setStyle("-fx-border-color: red");
                 return;
-            } else if(dateAdd.getText().length() <= 5) {
+            } else if(dateAdd.getText().length() <= 2) {
                 dateAdd.setStyle("-fx-border-color: red");
                 return;
-            } else if(timeAdd.getText().length() <= 5) {
+            } else if(timeAdd.getText().length() <= 2) {
                 timeAdd.setStyle("-fx-border-color: red");
                 return;
-            } else if(stationAdd.getText().length() <= 5) {
+            } else if(stationAdd.getText().length() <= 2) {
                 stationAdd.setStyle("-fx-border-color: red");
                 return;
             }
 
             try {
                 dataBase.addTicket(stationAdd.getText(), dateAdd.getText(), timeAdd.getText(), personAdd.getCharacters().toString());
+
+                PassengerService passengerService = new PassengerService();
+                Passenger passengerWithTicket = new Passenger(personAdd.getCharacters().toString(), surname.getCharacters().toString());
+                passengerService.createPassenger(passengerWithTicket);//записывает в БД нового пассажира
+
+                TicketService ticketService = new TicketService();
+                Ticket ticket = new Ticket(dateAdd.getText(), timeAdd.getText(), stationAdd.getText());
+                ticketService.createTicket(ticket);//записывает в БД новый билет
+
+                RequestService requestService = new RequestService();
+                Request request = new Request(1,1);
+                requestService.createRequest(request);//записывает в БД новый запрос
 
                 Parent root = FXMLLoader.load(getClass().getResource("/sample/scenes/main.fxml"));
                 Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -65,9 +86,9 @@ public class AddTicket {
                 primaryStage.show();
             } catch (SQLException e) {
                 e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
             } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
         });
