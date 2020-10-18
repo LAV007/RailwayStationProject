@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -20,10 +18,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import sample.patternDAO.dataBase.DataBase;
 import sample.auxiliary.User;
+import sample.patternDAO.layerDAO.PassengerDAO;
+import sample.patternDAO.layerDAO.TicketDAO;
 import sample.patternDAO.layerEntity.Passenger;
 import sample.patternDAO.layerEntity.Ticket;
-import sample.patternDAO.layerService.PassengerService;
-import sample.patternDAO.layerService.TicketService;
 
 public class MainController {
 
@@ -41,19 +39,30 @@ public class MainController {
     @FXML
     void initialize() throws SQLException {
 
-        //Отладочный вывод в консоль пассажиров
-        List<Passenger> passengers = new PassengerService().readPassenger();
-        for (Passenger passenger : passengers) {
-            System.out.println(passenger);
-        }
-        //Отладочный вывод в консоль билетов
-        List<Ticket> tickets = new TicketService().readTicket();
-        for (Ticket ticket : tickets) {
-            System.out.println(ticket);
-        }
+        PassengerDAO passengerDAO = new PassengerDAO();
+        /**
+         * Обновление пассажира по идентификационному номеру
+         */
+        passengerDAO.update(new Passenger("Alex", "Lys"), 22);
+
+        /**
+         *Удаление пассажира по идентификационному номеру
+         */
+        passengerDAO.delete(22);
+
+        TicketDAO ticketDAO = new TicketDAO();
+        /**
+         * Обновление билета по идентификационному номеру
+         */
+        ticketDAO.update(new Ticket("10/18/2020", "1.14", "Vyborg"), 16);
+
+        /**
+         *Удаление билета по идентификационному номеру
+         */
+        ticketDAO.delete(17);
 
         //Вывод пассажиров в UI
-        ResultSet resultSet = new PassengerService().getPassengers();
+        ResultSet resultSet = new PassengerDAO().read();
         while(resultSet.next()) {
             Node node = null;
             try {
@@ -86,7 +95,7 @@ public class MainController {
         }
 
         //Вывод билетов в UI
-        ResultSet res = new TicketService().getTickets();
+        ResultSet res = new TicketDAO().read();
         while(res.next()) {
             Node node = null;
             try {

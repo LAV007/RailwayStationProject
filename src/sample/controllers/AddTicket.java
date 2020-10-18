@@ -9,17 +9,14 @@ package sample.controllers;
         import javafx.scene.control.TextArea;
         import javafx.scene.control.TextField;
         import javafx.stage.Stage;
+        import sample.patternDAO.layerDAO.DAO;
         import sample.patternDAO.dataBase.DataBase;
+        import sample.patternDAO.layerDAO.PassengerDAO;
+        import sample.patternDAO.layerDAO.TicketDAO;
         import sample.patternDAO.layerEntity.Passenger;
-        import sample.patternDAO.layerEntity.Request;
         import sample.patternDAO.layerEntity.Ticket;
-        import sample.patternDAO.layerService.PassengerService;
-        import sample.patternDAO.layerService.RequestService;
-        import sample.patternDAO.layerService.TicketService;
-
         import java.io.IOException;
         import java.sql.SQLException;
-        import java.util.List;
 
 public class AddTicket {
 
@@ -43,6 +40,9 @@ public class AddTicket {
 
     private DataBase dataBase = new DataBase();
 
+    DAO<Passenger> passengerDAO = new PassengerDAO(dataBase.getDataBaseConnection());
+    DAO<Ticket> ticketDAO = new TicketDAO(dataBase.getDataBaseConnection());
+
     @FXML
     void initialize() {
         btn_add.setOnAction(event -> {
@@ -65,15 +65,11 @@ public class AddTicket {
             }
 
             try {
-                //dataBase.addTicket(stationAdd.getText(), dateAdd.getText(), timeAdd.getText(), personAdd.getCharacters().toString());
-
-                PassengerService passengerService = new PassengerService();
                 Passenger passengerWithTicket = new Passenger(personAdd.getCharacters().toString(), surname.getCharacters().toString());
-                passengerService.createPassenger(passengerWithTicket);//записывает в БД нового пассажира
+                passengerDAO.create(passengerWithTicket);//записывает в БД нового пассажира
 
-                TicketService ticketService = new TicketService();
                 Ticket ticket = new Ticket(dateAdd.getText(), timeAdd.getText(), stationAdd.getText());
-                ticketService.createTicket(ticket);//записывает в БД новый билет
+                ticketDAO.create(ticket);//записывает в БД новый билет
 
                 Parent root = FXMLLoader.load(getClass().getResource("/sample/scenes/main.fxml"));
                 Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();

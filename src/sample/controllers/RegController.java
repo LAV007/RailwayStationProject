@@ -45,7 +45,6 @@ public class RegController {
          /**
          * Actions when you click on the registration button
          */
-
         btn_reg.setOnAction(event -> {
             if(login_reg.getCharacters().length() <= 3) {
                 login_reg.setStyle("-fx-border-color: red");
@@ -67,8 +66,6 @@ public class RegController {
                     btn_reg.setText("Enter another login");
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
             }
         });
 
@@ -76,7 +73,6 @@ public class RegController {
          /**
          * Actions when clicking the authorization button
          */
-
         btn_auth.setOnAction(event -> {
             if(login_auth.getCharacters().length() <= 3) {
                 login_auth.setStyle("-fx-border-color: red");
@@ -109,8 +105,6 @@ public class RegController {
                     btn_auth.setText("not founded");
             } catch (SQLException e) {
                 e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -120,10 +114,7 @@ public class RegController {
 
      /**
      * This method encrypts the password
-     * @param pass
-     * @return
      */
-
     public static String md5String(String pass) {
         MessageDigest messageDigest = null;
         byte[] digest = new byte[0];
