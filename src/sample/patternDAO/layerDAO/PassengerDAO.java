@@ -84,6 +84,7 @@ public class PassengerDAO implements DAO<Passenger> {
         return new String();
     }*/
 
+
     @Override
     public void update(Passenger passenger, int id) {
         try (PreparedStatement preparedStatement = db.getDataBaseConnection().prepareStatement("UPDATE `passengers` SET `name`=? WHERE `id`=?")) {
